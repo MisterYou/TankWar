@@ -6,15 +6,16 @@ public class TankClient extends Frame{
 	public static final int GAME_WIDTR = 800;
 	public static final int GAME_HEIGHT = 600;
 	
-	int x = 50,y = 50;//设置位置的值
+	//int x = 50,y = 50;//设置位置的值
+	Tank myTank = new Tank(50,50);
+	Missile m = new Missile(50, 50, Tank.Direction.R);
+	
 	
 	Image offScreenImage = null;//虚拟的图片
 	
-	public void paint(Graphics g){
-		Color c = g.getColor();//先把前景色拿出来
-		g.setColor(Color.RED);//设置颜色
-		g.fillOval(x, y, 30, 30);//画一个圆
-		g.setColor(c);//将前景色还原
+	public void paint(Graphics g){ 
+		m.draw(g);
+		myTank.draw(g);
 	}
 	
 	public void update(Graphics g) {
@@ -68,22 +69,12 @@ public class TankClient extends Frame{
 	}
 
 	private class KeyMonitor extends KeyAdapter{
+		public void keyReleased(KeyEvent e) {
+			myTank.keyReleased(e);//松开键
+		}
+
 		public void keyPressed(KeyEvent e) {
-			int key = e.getKeyCode();//获取按键按下的值
-			switch(key){
-			case KeyEvent.VK_LEFT:
-				x -= 5;
-				break;
-			case KeyEvent.VK_UP:
-				y -= 5;
-				break;
-			case KeyEvent.VK_RIGHT:
-				x += 5;
-				break;
-			case KeyEvent.VK_DOWN:
-				y += 5;
-				break;
-			}
+			myTank.keyPresessed(e);//按下键
 		}
 		
 	}
