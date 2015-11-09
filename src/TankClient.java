@@ -15,7 +15,6 @@ public class TankClient extends Frame{
 		g.setColor(Color.RED);//设置颜色
 		g.fillOval(x, y, 30, 30);//画一个圆
 		g.setColor(c);//将前景色还原
-		y += 5;
 	}
 	
 	public void update(Graphics g) {
@@ -43,6 +42,8 @@ public class TankClient extends Frame{
 		});//关闭窗口，事件监听
 		this.setResizable(false);//禁止改变大小
 		this.setBackground(Color.GREEN);//设置背景颜色
+		
+		this.addKeyListener(new KeyMonitor());//监听键盘
 		setVisible(true);
 		new Thread(new PaintThread()).start();
 	}
@@ -66,4 +67,42 @@ public class TankClient extends Frame{
 		}
 	}
 
+	private class KeyMonitor extends KeyAdapter{
+		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode();//获取按键按下的值
+			switch(key){
+			case KeyEvent.VK_LEFT:
+				x -= 5;
+				break;
+			case KeyEvent.VK_UP:
+				y -= 5;
+				break;
+			case KeyEvent.VK_RIGHT:
+				x += 5;
+				break;
+			case KeyEvent.VK_DOWN:
+				y += 5;
+				break;
+			}
+		}
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
