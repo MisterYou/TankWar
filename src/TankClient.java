@@ -1,5 +1,8 @@
 import java.awt.*;
+import java.awt.List;
 import java.awt.event.*;
+import java.util.*;
+import java.util.ArrayList;
 
 public class TankClient extends Frame{
 	
@@ -7,14 +10,22 @@ public class TankClient extends Frame{
 	public static final int GAME_HEIGHT = 600;
 	
 	//int x = 50,y = 50;//设置位置的值
-	Tank myTank = new Tank(50,50);
-	Missile m = new Missile(50, 50, Tank.Direction.R);
+	Tank myTank = new Tank(50,50,this);
+	ArrayList<Missile> missiles = new ArrayList<Missile>();//容器装子弹
+	//Missile m = null;
 	
 	
 	Image offScreenImage = null;//虚拟的图片
 	
 	public void paint(Graphics g){ 
-		m.draw(g);
+		g.drawString("Missiles count: " + missiles.size(), 10, 50);
+		for(int i = 0;i < missiles.size();i++){
+			Missile m = missiles.get(i);
+			m.draw(g);
+			//if(!m.isLive()) missiles.remove(m);
+			//else m.draw(g);
+		}
+		//if(m != null) m.draw(g);
 		myTank.draw(g);
 	}
 	
